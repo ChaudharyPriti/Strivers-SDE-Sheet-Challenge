@@ -1,0 +1,21 @@
+#include <bits/stdc++.h> 
+typedef pair<int,int>pi;
+vector<int> KMostFrequent(int n, int k, vector<int> &arr)
+{
+   vector<int>ans;
+   unordered_map<int,int>mp;
+   for(int i=0;i<n;++i)
+    mp[arr[i]]++;
+    priority_queue<pi,vector<pi> , greater<pi>> minH;
+    for(auto x: mp){
+        minH.push({x.second,x.first});
+        if(minH.size()>k)
+            minH.pop();
+    }
+    while(k--){
+        ans.push_back(minH.top().second);
+        minH.pop();
+    }
+    sort(ans.begin(),ans.end());
+    return ans;
+}
